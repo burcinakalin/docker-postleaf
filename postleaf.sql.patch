@@ -1,0 +1,11 @@
+--- postleaf.sql	2016-09-22 15:37:49.891464887 +0300
++++ postleaf-new.sql	2016-09-22 16:21:57.040591391 +0300
+@@ -149,7 +149,7 @@
+ ('tagline', 'Go forth and create!'),
+ ('theme', 'range'),
+ ('timezone', 'America/New_York'),
+-('title', 'A Postleaf Blog'),
++('title', 'A Postleaf Blog (Docker Image)'),
+ ('twitter', ''),
+ ('password_min_length', '8');
+ 

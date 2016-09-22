@@ -1,5 +1,7 @@
 FROM php:5.6-apache
 
+MAINTAINER Burcin Akalin brcnakalin@gmail.com
+
 ENV PL_VERSION 1.0.0-beta7
 ENV PL_FILE postleaf-$PL_VERSION.zip
 ENV PL_VS_DIR postleaf-$PL_VERSION
@@ -11,6 +13,7 @@ RUN apt-get update && \
     apt-get -y install curl && \
     apt-get -y install unzip && \
     apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev && \
+    apt-get install -y patch && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install gd && \
     docker-php-ext-install pdo_mysql && \
@@ -29,6 +32,7 @@ COPY .htaccess $PL_DIR
 COPY database.php $PL_DIR
 COPY docker-entrypoint.sh /
 COPY postleaf.sql $PL_DIR
+COPY postleaf.sql.patch $PL_DIR
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
