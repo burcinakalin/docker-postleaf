@@ -1,53 +1,64 @@
-## About this repo
+# About
+
+This is the Git repository of the Postleaf Docker Image.
 
 
-This is the Git repo of the Docker image for Postleaf.
+## Environments
+
+* If you want run the image, you can use environment variables below:
+
+`PL_DB_HOST` : Database hostname (default: localhost)
+
+`PL_DB_PORT`: Database port (default: 3306)
+
+`PL_DB_NAME`: Database name (default: postleaf)
+
+`PL_DB_USER`: Database username (default: postleaf)
+
+`PL_DB_PASS`: Database user password (default: postleaf)
+
+`PL_DB_INIT`: Database initilization (default: false)
+
+`PL_DB_PREFIX`: Database prefix (default: postleaf_)
+
 
 ## Usage
 
-* If you want execute the image, you can use environment variable:
-
-`PL_DB_HOST` : hostname
-
-`PL_DB_PORT`: port
-
-`PL_DB_NAME`: mysql names
-
-`PL_DB_USER`: user name
-
-`PL_DB_PASS`: user password
-
-* If you have to database, you can use the PL_DB_INIT environment. -> `PL_DB_INIT`=false
-
-Even you do not need to write PL_DB_INIT because the PL_DB_INIT default is false.
-
-
-* If you do not use PL_DB_INIT environment, this command run ->
-
-   mysql -h ${PL_DB_HOST} -u ${PL_DB_USER} -p${PL_DB_PASS} ${PL_DB_NAME} < /var/www/html/postleaf/postleaf.sql
-
- so you must use `PL_DB_HOST`, `PL_DB_USER`, `PL_DB_PASS`, `PL_DB_NAME` environments.
-
-* The basic command that can be executed:
+* If you have a empty database for postleaf, you can use PL_DB_INIT=true.
 
 ```
-docker run -d -p 8000:80 -e PL_DB_HOST=---.---.-.-- -e PL_DB_PASS=12345 -e PL_DB_IT=true post
+docker run -d -p 80:80 -e PL_DB_HOST=<db_host> -e PL_DB_IT=true burcina/docker-postleaf
 ```
 
-Home page :
+* if you have a database with postleaf tables. You don't need to use this environment.
 
-`localhost:8000/postleaf`
+```
+docker run -d -p 80:80 -e PL_DB_HOST=<db_host>  burcina/docker-postleaf
+```
 
-## To Do
 
-if you enter to link,
+## Testing
 
-`localhost:8000/postleaf/admin`
+* You can use `/postleaf` url to entering postleaf.
 
-default variable for input
+`http://localhost/postleaf`
+
+* You can use `/postleaf/admin` url to entering admin panel.
+
+`http://localhost/postleaf/admin`
+
+* You can use username and password below for loggin as admin.
 
 `username` : administrator
 
 `password` : admin12345
 
-* this admin panel make adjustable.
+
+## Todo
+
+* Make admin username and password adjustable.
+* Make hardening to image.
+* Make nginx/caddy spesific image.
+* Test with postgresql.
+* Move this repo to upstream :)
+
